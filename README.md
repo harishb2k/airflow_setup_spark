@@ -44,8 +44,8 @@ airflow scheduler -D
 ```shell
 md -p /home/ubuntu/airflow/dags
 cp spark_operator_example.py /home/ubuntu/airflow/dags
-
 ```
+NOTE - change the spark_operator_example.py TODO. Use your own path for your spark program.
 
 ### Trigger it using HTTP call
 We have added "Authorization: Basic YWRtaW46YWRtaW4=". The value "YWRtaW46YWRtaW4=" is the Base64 of your use name "admin"
