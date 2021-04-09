@@ -25,6 +25,7 @@ run_this_last = DummyOperator(
     dag=dag,
 )
 
+# TODO - Here we are running a pi.py script. Change path to youre location.
 flight_search_ingestion= SparkSubmitOperator(
 	task_id='flight_search_ingestion',
 	conn_id='spark_default',
