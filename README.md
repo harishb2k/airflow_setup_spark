@@ -34,9 +34,31 @@ airflow users create --username admin --firstname Harish --lastname Bohara --rol
 1. You may want to change "web_server_port" to the port you need
 2. You may want to change "auth_backend" to "auth_backend=airflow.api.auth.backend.basic_auth"
 
-# Run in background
+### Run in background
 ``` shell
 airflow webserver -D
 airflow scheduler -D 
 ```
+
+### Add your flow in Airflow
+```shell
+md -p /home/ubuntu/airflow/dags
+cp spark_operator_example.py /home/ubuntu/airflow/dags
+
+```
+
+### Trigger it using HTTP call
+We have added "Authorization: Basic YWRtaW46YWRtaW4=". The value "YWRtaW46YWRtaW4=" is the Base64 of your use name "admin"
+``` shell
+curl --location --request POST 'http://192.168.64.2:9090/api/v1/dags/example_spark_operator/dagRuns' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "dag_run_id": "posting_spark_flow_1",
+    "conf": {
+        "param": "value"
+    }
+}'
+```
+
 
